@@ -1,0 +1,108 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <h1>Dashboard</h1>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<div class="dashboard">
+<!--Stats Section-->
+<div class="stats">
+    <div class="card">
+    <h2>Total Projects</h2>
+    <p>{{ project|length }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Total Employees</h2>
+        <p>{{ employees|length }}</p>
+    </div>
+    <div class="card">
+        <h2>Total Tasks</h2>
+        <p>{{ task|length }}</p>
+    </div>
+</div>
+
+<!--Projects Section-->
+<div class="Section">
+<h1 class="section-title" >Projects</h2>
+<div class="">    
+{% for proj in project %}
+    <div class="card">
+        <h1>{{ proj.name }}</h1>
+        <p><strong>-Manager:</strong> {{ proj.manager.user  }}
+        <p><strong>-Employees:</strong>
+        {% for emp in proj.employees.all %} 
+            {{emp.user}} , 
+        {% empty %}
+            No employees assigned
+        {% endfor %}
+    <div class="action">
+        <a href="/delete_project/{{ proj.id }}/">Delete</a>
+        <a href="/edit_project/{{ proj.id }}/">Edit</a>
+        <a href="/assign_employees/{{proj.id }}/">Assign_employees</a>
+    </div>
+</div>
+</div>
+{% empty %}
+    <p>No projects found</p>
+{% endfor %}
+
+
+
+<div class="section employee-box">
+<h1 class="section-title"> Employees </h1>
+
+
+
+     <!-- Managers -->
+    <optgroup label="Managers">
+        {% for emp in employees %}
+            {% if emp.role == "manager" %}
+                <option value="{{ emp.id }}">
+                    {{ emp.id }} - {{ emp.user }} - {{ emp.role }}
+                </option>
+            {% endif %}
+        {% endfor %}
+    </optgroup>
+    <!-- Employees -->
+    <optgroup label="Employees">
+        {% for emp in employees %}
+            {% if emp.role == "employee" %}
+                <option value="{{ emp.id }}">
+                    {{ emp.id }} - {{ emp.user }} - {{ emp.role }}
+                </option>
+            {% endif %}
+        {% endfor %}
+    </optgroup>
+
+
+</div>
+
+
+
+<div class="grid">
+<h1>  Task </h1>
+{% for t in task %}
+    <div class="card">
+        <p><strong>Project:</strong> {{ t.project.name }}</p>
+        <p><strong>Employee:</strong> {{ t.assigned_to.user }}</p>
+        <p><strong>Title:</strong>{{ t.title }}</p>
+        <p><strong>Status:</strong>{{ t.status}}</p>
+    </div>
+{% endfor %}
+</div>
+
+<div class="grid">
+
+<a href="{% url 'add_project' %}" class="btn project">Add Project</a>
+<a href="{% url 'add_task' %}" class="btn task">Add Task</a>
+
+<a href="{% url 'add_employee' %}" class="btn">Add Employee</a>
+<a href="{% url 'employee_list' %}" class="btn">Employee List</a>
+<a href="{% url 'add_department' %}" class="btn">Add Department</a>
+</div>
+</div>

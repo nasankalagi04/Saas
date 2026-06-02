@@ -1,0 +1,19 @@
+
+<h2>My Subscriptions</h2>
+
+
+<ul>
+    {% for sub in subs %}
+        <li>{{ sub.name }} - {{ sub.cost }} - {{ sub.billing_date }}</li>
+    {% empty %}
+        <li>No subscriptions found</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'add' %}">Add Subscription</a>
+
+{% for sub in subs %}
+    <a href="{% url 'edit' sub.id %}">Edit</a>
+{% endfor %}
+
+

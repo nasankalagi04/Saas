@@ -1,0 +1,26 @@
+<h2>Add Employee</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="username" placeholder="Username" required>
+   
+
+    <!-- Department -->
+    <select name="department_id">
+        {% for dept in departments %}
+            <option value="{{ dept.id }}">
+                {{ dept.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <!-- Role -->
+    <select name="role">
+        <option value="manager">Manager</option>
+        <option value="employee">Employee</option>
+        
+    </select>
+
+    <button type="submit">Add Employee</button>
+</form>

@@ -1,0 +1,7 @@
+<h2>Are you sure?</h2>
+<p>{{ sub.name }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>

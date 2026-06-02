@@ -1,0 +1,31 @@
+<h2>All Employees List</h2>
+
+{% for emp in employees %}
+
+    <p><strong>Employee ID: </strong>{{ emp.id }} </p>
+    <p><strong>Name: </strong> {{ emp.user}} </p>
+    <p><strong>Role: </strong> {{ emp.role}} </p>
+    <form method="POST" action="{% url 'delete_employee' emp.id %}">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+
+{% endfor %}
+
+<!---
+<h2>All User List</h2>
+{% for user in users %}
+<div class="card">
+    <p><strong>User ID: {{ user.id }} </P> 
+    <p><strong>Name: {{ user.username}} </P>
+    <P>
+        <form method="POST" action="{% url 'delete_user' user.id %}">
+        {% csrf_token %}
+        <button type="submit">Delete User</button>
+        </form>
+    </p>
+</div>
+{% empty %}
+    <p>No employees found</p>
+{% endfor %}
+-->

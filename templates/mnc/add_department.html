@@ -1,0 +1,7 @@
+<h2>Add Department</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Enter Department Name">
+    <button type="submit">Add</button>
+</form>

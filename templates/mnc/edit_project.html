@@ -1,0 +1,7 @@
+<h2>Edit Project</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" value="{{ project.name }}">
+    <button type="submit">Update</button>
+</form>
